@@ -64,6 +64,10 @@ const RecordDelete = () => {
   const handleConfirmationClose = () => {
     setShowConfirmation(false);
   };
+  
+  const handleCancel = () => {
+    navigate('/');
+  };
 
   if (!recordData) {
     return <Typography>Loading...</Typography>;
@@ -79,8 +83,12 @@ const RecordDelete = () => {
         variant="contained"
         color="primary"
         onClick={handleConfirmationOpen}
+        sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}}
       >
         Delete
+      </Button>
+      <Button onClick={handleCancel} variant="contained" color="primary" sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}}>
+        Cancel
       </Button>
 
       <Dialog open={showConfirmation} onClose={handleConfirmationClose}>

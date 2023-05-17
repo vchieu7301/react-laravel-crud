@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Typography, Grid } from "@mui/material";
 import axios from "axios";
 
 const RecordUpdate = () => {
@@ -50,35 +50,49 @@ const RecordUpdate = () => {
           },
         }
       );
-
-      console.log("User updated successfully!");
+      console.log('Response:', response);
       navigate("/");
     } catch (error) {
       console.error("Error updating user:", error);
     }
   };
 
+  const handleCancel = () => {
+    navigate('/');
+  };
+
   return (
     <div>
-      <h1>Update User</h1>
+       <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Update Record
+        </Typography>
       <form>
+      <Grid item>
         <TextField
           label="Title"
           value={RecordData.title || ""}
+          fullWidth
           onChange={(e) =>
             setRecordData({ ...RecordData, title: e.target.value })
           }
         />
+        </Grid>
+        <Grid item>
         <TextField
           label="Description"
           value={RecordData.description || ""}
+          fullWidth
           onChange={(e) =>
             setRecordData({ ...RecordData, description: e.target.value })
           }
         />
-        <Button variant="contained" onClick={handleUpdateUser}>
+        </Grid>
+        <Button variant="contained" onClick={handleUpdateUser} sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}} >
           Update
         </Button>
+        <Button onClick={handleCancel} variant="contained" color="primary" sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}}>
+        Cancel
+      </Button>
       </form>
     </div>
   );

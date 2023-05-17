@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Typography,
   Container,
   Table,
   TableHead,
@@ -17,6 +16,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [listData, setListData] = useState([]);
   useEffect(() => {
+    if (!isLoggedin()) {
+      navigate('/login');
+    }
     const fetchData = async () => {
       try {
         const response = await axios.get("http://test.localhost/api/records", {
@@ -32,7 +34,13 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [navigate]);
+
+  function isLoggedin() {
+    const token = localStorage.getItem('PersonalAccessToken');
+    return token !== null; 
+  }
+
   const handleUpdate = async (id) => {
     try {
       navigate(`/update/${id}`);

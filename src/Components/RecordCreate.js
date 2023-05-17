@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Grid, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
 const RecordCreate = () => {
@@ -14,6 +14,10 @@ const navigate = useNavigate();
 
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
+  };
+
+  const handleCancel = () => {
+    navigate('/');
   };
 
   const handleSubmit = async (event) => {
@@ -36,29 +40,37 @@ const navigate = useNavigate();
       navigate("/");
     } catch (error) {
       console.error('Error creating record:', error);
-      
-      // Xử lý lỗi nếu cần thiết
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Create Record
+        </Typography>
+    <Grid item >
       <TextField
         label="Title"
         value={title}
-        onChange={handleTitleChange}
         fullWidth
+        onChange={handleTitleChange}
         required
       />
+      </Grid>
+      <Grid item>
       <TextField
         label="Description"
         value={description}
-        onChange={handleDescriptionChange}
         fullWidth
+        onChange={handleDescriptionChange}
         required
       />
-      <Button type="submit" variant="contained" color="primary">
+      </Grid>
+      <Button type="submit" variant="contained" color="primary" sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}}>
         Create Record
+      </Button>
+      <Button onClick={handleCancel} variant="contained" color="primary" sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}}>
+        Cancel
       </Button>
     </form>
   );
