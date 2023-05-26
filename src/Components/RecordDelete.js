@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Container
 } from "@mui/material";
 import axios from "axios";
 
@@ -31,7 +32,6 @@ const RecordDelete = () => {
         const recordData = {
           title: response.data.result.title,
           description: response.data.result.description,
-          // Update other record fields if needed
         };
         setRecordData(recordData);
       } catch (error) {
@@ -64,9 +64,9 @@ const RecordDelete = () => {
   const handleConfirmationClose = () => {
     setShowConfirmation(false);
   };
-  
+
   const handleCancel = () => {
-    navigate('/');
+    navigate("/");
   };
 
   if (!recordData) {
@@ -75,6 +75,7 @@ const RecordDelete = () => {
 
   return (
     <div>
+    <Container>
       <Typography variant="h4">Record Details</Typography>
       <Typography>Title: {recordData.title || ""}</Typography>
       <Typography>Description: {recordData.description || ""}</Typography>
@@ -83,11 +84,16 @@ const RecordDelete = () => {
         variant="contained"
         color="primary"
         onClick={handleConfirmationOpen}
-        sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}}
+        sx={{ mt: 3, mb: 2, ml: 3, mr: 2 }}
       >
         Delete
       </Button>
-      <Button onClick={handleCancel} variant="contained" color="primary" sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}}>
+      <Button
+        onClick={handleCancel}
+        variant="contained"
+        color="primary"
+        sx={{ mt: 3, mb: 2, ml: 3, mr: 2 }}
+      >
         Cancel
       </Button>
 
@@ -103,6 +109,7 @@ const RecordDelete = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      </Container>
     </div>
   );
 };

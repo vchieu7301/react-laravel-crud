@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { TextField, Button, Typography, Grid } from "@mui/material";
+import { TextField, Button, Typography, Grid, Container } from "@mui/material";
 import axios from "axios";
 
 const RecordUpdate = () => {
@@ -23,8 +23,6 @@ const RecordUpdate = () => {
             },
           }
         );
-
-        // Update the user data in the state
         const recordData = {
           title: response.data.result.title,
           description: response.data.result.description,
@@ -63,10 +61,12 @@ const RecordUpdate = () => {
 
   return (
     <div>
+    <Container>
        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Update Record
         </Typography>
       <form>
+      <Grid container direction={"column"} spacing={2}>
       <Grid item>
         <TextField
           label="Title"
@@ -81,11 +81,15 @@ const RecordUpdate = () => {
         <TextField
           label="Description"
           value={RecordData.description || ""}
+          multiline
+          rows={4}
+          rowsMax={Infinity}
           fullWidth
           onChange={(e) =>
             setRecordData({ ...RecordData, description: e.target.value })
           }
         />
+        </Grid>
         </Grid>
         <Button variant="contained" onClick={handleUpdateUser} sx={{ mt: 3, mb: 2,  ml: 3, mr: 2}} >
           Update
@@ -94,6 +98,7 @@ const RecordUpdate = () => {
         Cancel
       </Button>
       </form>
+      </Container>
     </div>
   );
 };
